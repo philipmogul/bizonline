@@ -1,6 +1,13 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
-   RewriteBase /Bizonline/
+	
+	# -- REDIRECTION to https (optional):
+	# If you need this, uncomment the next two commands
+	RewriteCond %{HTTPS} !on
+  	RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L]
+	# --
+	
+#  
    RewriteRule ^index\.html$ - [L]
    RewriteCond %{REQUEST_FILENAME} !-f
    RewriteCond %{REQUEST_FILENAME} !-d
