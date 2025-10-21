@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+echo "PHP reached start of file<br>";
 
 $http_origin = $_SERVER['HTTP_ORIGIN'];
 
@@ -25,18 +30,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 }
 
 // Include the api.php file
-require_once("api.php");
+// require_once("api.php");
+require_once __DIR__ . '/api.php';
 
-require_once("JWT/autoload.php");
+// require_once("JWT/autoload.php");
+require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 date_default_timezone_set('Africa/Nairobi');
 
 
-$servername = "database-1.chm6scy2wvib.eu-west-1.rds.amazonaws.com";
-$username = "admin";
-$password = "ROVyPaSmp2oR2GwTA9Ge";
-$dbname = "contactform";
+$servername = "angular-testdb.chm6scy2wvib.eu-west-1.rds.amazonaws.com";
+$username = "angular";
+$password = "passWord$1";
+$dbname = "angular-imported";
 
 // $servername = "localhost";
 // $username = "root";

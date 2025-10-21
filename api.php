@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+echo "PHP reached start of file<br>";
 
 $http_origin = $_SERVER['HTTP_ORIGIN'];
 
@@ -26,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit(0);
 }
 
-require_once("JWT/autoload.php");
+// require_once("JWT/autoload.php");
+require_once __DIR__ . '/vendor/autoload.php';
 use \Firebase\JWT\JWT;
 
 // secret key can be a random string and keep in secret from anyone
@@ -38,10 +44,10 @@ date_default_timezone_set('Africa/Nairobi');
 
 $TODAY = date('Y-m-d H:i:s', time());
 
-$servername = "database-1.chm6scy2wvib.eu-west-1.rds.amazonaws.com";
-$username = "admin";
-$password = "ROVyPaSmp2oR2GwTA9Ge";
-$dbname = "contactform";
+$servername = "angular-testdb.chm6scy2wvib.eu-west-1.rds.amazonaws.com";
+$username = "angular";
+$password = "passWord$1";
+$dbname = "angular-imported";
 
 // $servername = "localhost";
 // $username = "root";
@@ -4357,54 +4363,54 @@ function backupDatabase_local($conn1) {
    
 }
 
-function backupDatabase_new($conn1) {
-    $user_id = $request->uid;
+// function backupDatabase_new($conn1) {
+//     $user_id = $request->uid;
     
-    // set_download_time($conn, $user_id);
+//     // set_download_time($conn, $user_id);
     
-    // build the mysqldump
+//     // build the mysqldump
     
-    global $db_name;
-    $filename = $db_name.'.sql';
+//     global $db_name;
+//     $filename = $db_name.'.sql';
 
-    global $password;
+//     global $password;
     
-    $command = ("mysqldump --user=rydenent_admin --password=\"$password\" --host=localhost $db_name > $filename 2>error_log");
+//     $command = ("mysqldump --user=rydenent_admin --password=\"$password\" --host=localhost $db_name > $filename 2>error_log");
     
-    // execute the command and capture the output
-    exec($command, $output, $returnCode);
+//     // execute the command and capture the output
+//     exec($command, $output, $returnCode);
     
-    if($returnCode===0) {
+//     if($returnCode===0) {
         
-        header('Content-Type: application/octet-stream');
-        header("Content-Disposition: attachment; filename=\"$filename\"");
-        header('Content-Length: ' . filesize($filename));
+//         header('Content-Type: application/octet-stream');
+//         header("Content-Disposition: attachment; filename=\"$filename\"");
+//         header('Content-Length: ' . filesize($filename));
         
-        file_put_contents('backup.sql', $filename);
-        // Read the file and output it
-        readfile($filename);
+//         file_put_contents('backup.sql', $filename);
+//         // Read the file and output it
+//         readfile($filename);
 
-        unlink($filename); // remove the temporary file
+//         unlink($filename); // remove the temporary file
         
-        //$backupFile = implode("/n", $output);
+//         //$backupFile = implode("/n", $output);
         
-        // mysqli_close($conn);
+//         // mysqli_close($conn);
         
         
         
-    } else {
+//     } else {
         
-        // reset_download_time($conn);
+//         // reset_download_time($conn);
         
-        // $data_insert = array(
-        //     "status" => "error",
-        //     "message" => "Could not download file!"
-        // );
-        // // return the error
-        // echo json_encode($data_insert);
-        // mysqli_close($conn);
-    }
-}
+//         // $data_insert = array(
+//         //     "status" => "error",
+//         //     "message" => "Could not download file!"
+//         // );
+//         // // return the error
+//         // echo json_encode($data_insert);
+//         // mysqli_close($conn);
+//     }
+// }
 
 function backupDatabase($conn1) {
     
@@ -4446,8 +4452,9 @@ function backupDatabase($conn1) {
             
             // $command = "mysqldump -h localhost -u $username -p\"$password\" $dbname > $backupFile 2>error_log";
 
-            $command = ("mysqldump --user=\"$username\" --password=\"$password\" --host=localhost $db_name > $filename 2>error_log");
-    
+            // $command = ("mysqldump --user=\"$username\" --password=\"$password\" --host=localhost $db_name > $filename 2>error_log");
+            
+            $command = '';
             
             // execute the command and capture the output
             exec($command, $output, $returnCode);
@@ -4514,8 +4521,9 @@ function backupDatabase($conn1) {
         
         // $command = "mysqldump -h localhost -u $username -p\"$password\" $dbname > $backupFile 2>error_log";
 
-        $command = ("mysqldump --user=\"$username\" --password=\"$password\" --host=localhost $db_name > $filename 2>error_log");
-    
+        // $command = ("mysqldump --user=\"$username\" --password=\"$password\" --host=localhost $db_name > $filename 2>error_log");
+        
+        $command = '';
         
         // execute the command and capture the output
         exec($command, $output, $returnCode);
